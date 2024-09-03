@@ -45,16 +45,18 @@ def buscando_relevancia(query, df):
     return sorted_indices, relevance_scores
 
 
-def formatando_resposta(sorted_indices, relevance_scores, df, max_docs=10):
+def formatando_resposta(sorted_indices, relevance_scores, df, max_docs=10, min_relevance=0.5):
     resposta_formatada = []
     for i in range(min(max_docs, len(sorted_indices))):
         index = sorted_indices[i]
-        document = {
-            "title": df.iloc[index]["title"],
-            "content": df.iloc[index]["content"],
-            "relevance": relevance_scores[index],
-        }
-        resposta_formatada.append(document)
+        relevance = relevance_scores[index]
+        if relevance >= min_relevance:
+            document = {
+                "title": df.iloc[index]["title"],
+                "content": df.iloc[index]["content"],
+                "relevance": relevance,
+            }
+            resposta_formatada.append(document)
     return resposta_formatada
 
 
@@ -77,7 +79,7 @@ def predict(X: str = Query(..., description="Input text for prediction")):
 @app.get("/query")
 def query_route(query: str = Query(..., description="Search query")):
     sorted_indices, relevance_scores = buscando_relevancia(query, df)
-    resposta = formatando_resposta(sorted_indices, relevance_scores, df)
+    resposta = formatando_resposta(sorted_indices, relevance_scores, df, min_relevance=0.5)
     return {"results": resposta, "message": "OK"}
 
 
