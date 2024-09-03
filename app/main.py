@@ -82,7 +82,7 @@ def query_route(query: str = Query(..., description="Search query")):
 
 
 def run():
-    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=7654, reload=True)
 
 
 if __name__ == "__main__":
