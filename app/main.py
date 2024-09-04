@@ -7,18 +7,7 @@ import numpy as np
 import re
 
 
-# class DummyModel:
-#     def predict(self, X):
-#         return "dummy prediction"
-
-
-# def load_model():
-#     predictor = DummyModel()
-#     return predictor
-
-
 app = FastAPI()
-# app.predictor = load_model()
 
 
 # Carregar o DataFrame e pré-processar
@@ -27,13 +16,6 @@ df = df_invertido.T
 df = df.drop(columns=["picture_link"])
 df["content"] = df["ingredients"].astype(str) + " " + df["instructions"].astype(str)
 
-
-# Funções de tokenização e cálculo de relevância
-def tokenize(s):
-    s = s.upper()
-    expression = r"\w+"
-    tokens = re.findall(expression, s)
-    return tokens
 
 
 def buscando_relevancia(query, df):
@@ -66,14 +48,6 @@ def read_hello():
     return {"message": "hello world"}
 
 
-@app.get("/predict")
-def predict(X: str = Query(..., description="Input text for prediction")):
-    result = app.predictor.predict(X)
-    return {
-        "input_value": X,
-        "predicted_value": result,
-        "message": "prediction successful",
-    }
 
 
 @app.get("/query")
