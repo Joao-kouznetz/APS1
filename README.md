@@ -30,7 +30,7 @@ A **relevancia** dele é pessoal porque nunca tenho ideia do que se fazer com ba
 
 ## Como testar:
 - Para testar ele é só estar conectado no internet do insper pesquisar no seu navegador a seguinte url: `http://10.103.0.28:7654/hello` ele deve devolver um hello world mostando que a api esta funcionado
-- para testar a pesquisa voce pode na internet do insper pesquisar com a seguinte url: `http://0.0.0.0:7654/query?query=beans` ele deve devolver um json mostrando as receitas mais relevantes com a sua query, ela sendo beans.
+- para testar a pesquisa voce pode na internet do insper pesquisar com a seguinte url: `http://10.103.0.28:7654/query?query=beans` ele deve devolver um json mostrando as receitas mais relevantes com a sua query, ela sendo beans.
 
 
 ## De onde consegui os dados:
